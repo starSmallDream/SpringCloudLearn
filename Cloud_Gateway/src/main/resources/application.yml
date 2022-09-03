@@ -1,0 +1,27 @@
+
+
+server:
+  port: 8902
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: after_baidu
+          uri: https://example.org
+          filters:
+            - RedirectTo=302, https://baidu.com
+          predicates:
+            - Path=/baidu
+        - id: after_wangyi
+          uri: https://example.org
+          filters:
+            - RedirectTo=302, https://www.163.com
+          predicates:
+            - Path=/wangyi
+        - id: after_sougou
+          uri: https://www.sogou.com
+          filters:
+            - StripPrefix=1
+          predicates:
+            - Path=/sougou
+debug: true
